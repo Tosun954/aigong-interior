@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아이공 인테리어 | AiGONG INTERIOR & DESIGN</title>
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<!-- Dependencies -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Pretendard', 'sans-serif'],
+                display: ['Pretendard', 'sans-serif'],
+                serif: ['Cormorant Garamond', 'serif'],
+            }
+        }
+    }
+}
+</script>
+<style>
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2'); font-weight: 100; font-display: swap; }
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2') format('woff2'); font-weight: 200; font-display: swap; }
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2') format('woff2'); font-weight: 800; font-display: swap; }
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2') format('woff2'); font-weight: 900; font-display: swap; }
+html::-webkit-scrollbar { width: 0.5rem; }
+html::-webkit-scrollbar-track { background: #1A1A1A; }
+html::-webkit-scrollbar-thumb { background: #1B3A4B; border-radius: 1rem; }
+.page-modal-active { overflow: hidden; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+</head>
+<body class="bg-[#F5F5F0] text-[#1A1A1A] font-sans font-light antialiased selection:bg-[#00B4D8] selection:text-white overflow-x-hidden text-base">
+
+    <!-- Global Noise Texture -->
+    <svg class="pointer-events-none fixed inset-0 z-[100] h-full w-full opacity-[0.04]" style="mix-blend-mode: multiply;">
+        <filter id="noiseFilter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+    </svg>
+
+    <!-- Floating Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 z-50 flex items-center justify-between px-8 md:px-12 py-4 w-full transition-all duration-500 text-[#F5F5F0] border-b border-white/10 backdrop-blur-sm bg-black/5">
+        <a href="#" class="font-display font-medium text-lg tracking-[0.1em] flex items-center gap-2">
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+                <path d="M20 4L6 18H14V18C14 18 14 28 14 28H26V18H34L20 4Z" fill="#00B4D8"/>
+                <rect x="18" y="22" width="4" height="6" rx="1" fill="#F5F5F0"/>
+            </svg>
+            <span>AiGONG</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8 text-sm font-normal">
+            <a href="#portfolio" class="hover:-translate-y-[1%] transition-transform">시공사례</a>
+            <a href="#process" class="hover:-translate-y-[1%] transition-transform">프로세스</a>
+            <a href="#contact" class="hover:-translate-y-[1%] transition-transform">상담신청</a>
+        </div>
+        <a href="tel:01012345678" class="magnetic-btn relative overflow-hidden group rounded-full bg-[#FF6B35] text-white px-6 py-2.5 text-sm font-normal flex items-center gap-2">
+            <span class="absolute inset-0 bg-[#E55A2B] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] z-0"></span>
+            <span class="relative z-10 transition-colors duration-500 tracking-tight">무료 상담</span>
+            <iconify-icon icon="solar:phone-linear" class="relative z-10 text-base"></iconify-icon>
+        </a>
+    </nav>
+
+    <!-- Full Screen Page Modal -->
+    <div id="page-modal" class="fixed inset-0 z-[60] bg-[#F5F5F0] translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] flex flex-col">
+        <div class="flex items-center justify-between px-6 py-6 md:px-12 border-b border-[#1B3A4B]/10">
+            <div class="font-display font-normal text-lg uppercase tracking-[0.2em] text-[#1B3A4B]">아이공 인테리어</div>
+            <button id="close-modal" class="text-[#1A1A1A] hover:text-[#00B4D8] transition-colors flex items-center gap-2 text-sm font-normal">
+                <span>닫기</span>
+                <iconify-icon icon="solar:close-circle-linear" class="text-xl"></iconify-icon>
+            </button>
+        </div>
+        <div class="flex-1 overflow-y-auto px-6 py-16 md:px-12 max-w-4xl mx-auto w-full" id="modal-content"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative h-[100dvh] w-full flex items-end pb-24 px-6 md:px-12" id="hero">
+        <div class="absolute inset-0 z-0 bg-[#1A1A1A] overflow-hidden">
+            <!-- Hero Slideshow Track (3 slides + 1 clone for seamless loop) -->
+            <div id="hero-track" class="flex h-full will-change-transform" style="transform: translateX(0);">
+                <div class="shrink-0 w-screen h-full"><img src="./001.jpg" alt="거실 인테리어" class="w-full h-full object-cover opacity-70" /></div>
+                <div class="shrink-0 w-screen h-full"><img src="./002.jpg" alt="주방 인테리어" class="w-full h-full object-cover opacity-70" /></div>
+                <div class="shrink-0 w-screen h-full"><img src="./003.jpg" alt="욕실 인테리어" class="w-full h-full object-cover opacity-70" /></div>
+                <div class="shrink-0 w-screen h-full"><img src="./001.jpg" alt="거실 인테리어" class="w-full h-full object-cover opacity-70" /></div>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/50 to-transparent z-[1]"></div>
+        </div>
+
+        <!-- Slide Indicators -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+            <button class="hero-dot w-10 h-1 rounded-full bg-white/80 transition-all duration-500" data-index="0"></button>
+            <button class="hero-dot w-10 h-1 rounded-full bg-white/30 transition-all duration-500" data-index="1"></button>
+            <button class="hero-dot w-10 h-1 rounded-full bg-white/30 transition-all duration-500" data-index="2"></button>
+        </div>
+        <div class="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-start">
+            <div class="overflow-hidden mb-2">
+                <p class="hero-el font-display text-sm text-[#00B4D8] uppercase tracking-[0.2em] mb-6 font-normal">AiGONG INTERIOR & DESIGN</p>
+            </div>
+            <div class="overflow-hidden">
+                <h1 class="hero-el text-4xl md:text-7xl leading-[1.15] font-display font-medium tracking-tighter text-[#F5F5F0]">
+                    간편한 첫걸음,
+                </h1>
+            </div>
+            <div class="overflow-hidden">
+                <h2 class="hero-el text-5xl md:text-8xl leading-[1.05] font-display font-medium tracking-tighter text-[#F5F5F0] mt-2 mb-12">
+                    공간이 바뀌는 순간.
+                </h2>
+            </div>
+            <div class="hero-el flex flex-col sm:flex-row gap-4">
+                <a href="#contact" class="magnetic-btn relative overflow-hidden group rounded-full bg-[#F5F5F0] text-[#1A1A1A] px-8 py-4 text-base font-normal inline-flex items-center justify-center gap-3">
+                    <span class="absolute inset-0 bg-[#00B4D8] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] z-0"></span>
+                    <span class="relative z-10 group-hover:text-white transition-colors duration-500">무료 상담 신청하기</span>
+                    <iconify-icon icon="solar:arrow-right-linear" class="relative z-10 text-xl group-hover:text-white transition-colors duration-500"></iconify-icon>
+                </a>
+                <a href="tel:01012345678" class="magnetic-btn relative overflow-hidden group rounded-full border border-[#F5F5F0]/30 text-[#F5F5F0] px-8 py-4 text-base font-normal inline-flex items-center justify-center gap-3">
+                    <span class="absolute inset-0 bg-[#F5F5F0]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] z-0"></span>
+                    <iconify-icon icon="solar:phone-calling-linear" class="relative z-10 text-xl"></iconify-icon>
+                    <span class="relative z-10">010-1234-5678</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features: Service Cards -->
+    <section class="py-32 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+            <h3 class="text-4xl md:text-6xl leading-[1.1] font-display font-medium tracking-tighter text-[#1B3A4B]">
+                공간의 가능성
+            </h3>
+            <p class="text-base text-[#1A1A1A]/70 max-w-sm mt-6 md:mt-0 font-light leading-relaxed">당신의 공간을 분석하고, 라이프스타일에 맞는 최적의 디자인을 제안합니다.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Card 1: 주거 공간 Shuffler -->
+            <div class="feature-card bg-white rounded-3xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#1B3A4B]/5 flex flex-col h-[28rem]">
+                <div class="flex justify-between items-start mb-auto">
+                    <div>
+                        <h4 class="font-display font-medium tracking-tighter text-2xl text-[#1B3A4B]">주거 공간</h4>
+                        <p class="text-sm text-[#1A1A1A]/50 mt-2 font-light">아파트 · 빌라 · 단독주택</p>
+                    </div>
+                    <iconify-icon icon="solar:home-2-linear" class="text-2xl text-[#00B4D8]"></iconify-icon>
+                </div>
+                <div class="relative h-56 w-full mt-8 flex justify-center" style="perspective: 1000px;">
+                    <div class="shuffle-card absolute w-full max-w-[15rem] bg-[#F5F5F0] border border-[#1B3A4B]/10 rounded-2xl p-5 shadow-sm" style="z-index: 3; transform: translateY(0) scale(1);">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm font-display font-normal text-[#1B3A4B]">거실 리모델링</span>
+                            <iconify-icon icon="solar:sofa-2-linear" class="text-[#1A1A1A]/30 text-base"></iconify-icon>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="h-1.5 w-full bg-[#1B3A4B]/10 rounded-full overflow-hidden"><div class="h-full bg-[#00B4D8] w-[90%]"></div></div>
+                            <div class="flex justify-between text-xs text-[#1A1A1A]/40 uppercase tracking-widest"><span>만족도</span><span>90%</span></div>
+                        </div>
+                    </div>
+                    <div class="shuffle-card absolute w-full max-w-[15rem] bg-white border border-[#1B3A4B]/10 rounded-2xl p-5 shadow-sm" style="z-index: 2; transform: translateY(15px) scale(0.95);">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm font-display font-normal text-[#1B3A4B]">주방 인테리어</span>
+                            <iconify-icon icon="solar:chef-hat-linear" class="text-[#1A1A1A]/30 text-base"></iconify-icon>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="h-1.5 w-full bg-[#1B3A4B]/10 rounded-full overflow-hidden"><div class="h-full bg-[#1B3A4B] w-[95%]"></div></div>
+                            <div class="flex justify-between text-xs text-[#1A1A1A]/40 uppercase tracking-widest"><span>인기</span><span>95%</span></div>
+                        </div>
+                    </div>
+                    <div class="shuffle-card absolute w-full max-w-[15rem] bg-[#F5F5F0] border border-[#1B3A4B]/10 rounded-2xl p-5 shadow-sm" style="z-index: 1; transform: translateY(30px) scale(0.9);">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm font-display font-normal text-[#1B3A4B]">욕실 리뉴얼</span>
+                            <iconify-icon icon="solar:bath-linear" class="text-[#1A1A1A]/30 text-base"></iconify-icon>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="h-1.5 w-full bg-[#1B3A4B]/10 rounded-full overflow-hidden"><div class="h-full bg-[#1A1A1A] w-[85%]"></div></div>
+                            <div class="flex justify-between text-xs text-[#1A1A1A]/40 uppercase tracking-widest"><span>전환율</span><span>85%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: 상업 공간 -->
+            <div class="feature-card bg-[#1B3A4B] rounded-3xl p-8 shadow-lg flex flex-col h-[28rem] text-[#F5F5F0]">
+                <div class="flex justify-between items-start mb-8">
+                    <div>
+                        <h4 class="font-display font-medium tracking-tighter text-2xl text-[#F5F5F0]">상업 공간</h4>
+                        <p class="text-sm text-[#F5F5F0]/50 mt-2 font-light">사무실 · 카페 · 매장</p>
+                    </div>
+                    <div class="flex items-center gap-2 bg-[#1A1A1A]/40 rounded-full px-3 py-1.5 border border-[#F5F5F0]/10">
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#00B4D8] animate-pulse"></div>
+                        <span class="text-xs font-display tracking-[0.1em] uppercase">인기</span>
+                    </div>
+                </div>
+                <div class="flex-1 bg-[#1A1A1A]/30 rounded-2xl border border-[#F5F5F0]/5 p-6 flex flex-col justify-center relative overflow-hidden">
+                    <div class="w-full mb-8">
+                        <div class="flex justify-between text-xs text-[#F5F5F0]/40 uppercase tracking-widest mb-3">
+                            <span>공간 효율</span>
+                            <span id="grade-readout">0.0%</span>
+                        </div>
+                        <div class="w-full h-10 bg-[#1A1A1A]/50 rounded-xl relative overflow-hidden border border-[#F5F5F0]/5 flex items-center justify-center">
+                            <div class="w-16 h-5 rounded-full border border-[#F5F5F0]/20 flex items-center justify-center">
+                                <div id="bubble-level" class="w-2.5 h-2.5 rounded-full bg-[#00B4D8] transition-transform duration-300 shadow-[0_0_8px_#00B4D8]"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between h-20 px-2 gap-1 relative z-10">
+                        <div class="w-1/5 bg-[#F5F5F0]/20 rounded-t-sm h-[40%] transition-all duration-700 hover:h-[60%]"></div>
+                        <div class="w-1/5 bg-[#F5F5F0]/40 rounded-t-sm h-[60%] transition-all duration-700 hover:h-[70%] relative">
+                            <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-[1px] bg-[#00B4D8]"></div>
+                        </div>
+                        <div class="w-1/5 bg-[#F5F5F0]/80 rounded-t-sm h-[100%] transition-all duration-700"></div>
+                        <div class="w-1/5 bg-[#F5F5F0]/40 rounded-t-sm h-[70%] transition-all duration-700 hover:h-[80%] relative">
+                            <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-[1px] bg-[#00B4D8]"></div>
+                        </div>
+                        <div class="w-1/5 bg-[#F5F5F0]/20 rounded-t-sm h-[50%] transition-all duration-700 hover:h-[40%]"></div>
+                    </div>
+                    <div class="absolute bottom-6 left-0 w-full h-[1px] bg-[#00B4D8]/30 border-t border-dashed border-[#00B4D8]/50"></div>
+                </div>
+            </div>
+
+            <!-- Card 3: 일정 스케줄러 -->
+            <div class="feature-card bg-white rounded-3xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-[#1B3A4B]/5 flex flex-col h-[28rem]">
+                <div class="flex justify-between items-start mb-8">
+                    <div>
+                        <h4 class="font-display font-medium tracking-tighter text-2xl text-[#1B3A4B]">시공 일정</h4>
+                        <p class="text-sm text-[#1A1A1A]/50 mt-2 font-light">체계적인 공정 관리</p>
+                    </div>
+                    <iconify-icon icon="solar:calendar-linear" class="text-2xl text-[#1B3A4B]"></iconify-icon>
+                </div>
+                <div class="relative flex-1 bg-[#F5F5F0]/50 rounded-2xl border border-[#1B3A4B]/5 p-5 overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="grid grid-cols-7 gap-1 text-center text-xs font-normal text-[#1A1A1A]/40 mb-4 tracking-wider">
+                            <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1.5 h-28">
+                            <div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div><div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div><div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div><div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div><div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div><div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div><div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div>
+                            <div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div><div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div><div id="target-cell" class="bg-white rounded border border-[#1B3A4B]/5 h-7 transition-colors"></div><div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div><div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div><div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div><div class="bg-white rounded border border-[#1B3A4B]/5 h-7"></div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center mt-4">
+                        <div class="h-2 w-20 bg-[#1B3A4B]/10 rounded-full"></div>
+                        <button id="save-btn" class="bg-[#1B3A4B] text-[#F5F5F0] text-xs px-5 py-2 rounded-full transition-transform tracking-wider">예약확정</button>
+                    </div>
+                    <iconify-icon id="scheduler-cursor" icon="solar:mouse-linear" class="absolute z-20 text-[#1A1A1A] text-2xl drop-shadow-md" style="top: 10%; left: 10%;"></iconify-icon>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="relative py-48 px-6 md:px-12 bg-[#1A1A1A] text-[#F5F5F0] overflow-hidden rounded-t-[3rem] md:rounded-t-[4rem]" id="philosophy">
+        <div class="absolute inset-0 z-0 opacity-50 parallax-bg" style="background: radial-gradient(circle at 50% 10%, #1B3A4B 0%, #1A1A1A 80%);"></div>
+        <div class="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center">
+            <p class="font-display text-base md:text-lg text-[#F5F5F0]/60 mb-10 uppercase tracking-[0.2em]" id="phil-subtitle">
+                단순한 인테리어가 아닙니다.
+            </p>
+            <h2 class="text-4xl md:text-7xl leading-[1.15] font-serif italic text-[#F5F5F0] tracking-tighter" id="phil-title">
+                당신의 <span class="text-[#00B4D8] not-italic font-display font-medium tracking-tighter">일상</span>을 디자인합니다.
+            </h2>
+        </div>
+    </section>
+
+    <!-- Portfolio Slideshow -->
+    <section class="py-32 px-6 md:px-12 bg-[#F5F5F0] relative z-20 -mt-10 rounded-t-[3rem] md:rounded-t-[4rem]" id="portfolio">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <h2 class="text-4xl md:text-6xl leading-[1.1] font-display font-medium tracking-tighter text-[#1B3A4B]">
+                        시공 사례
+                    </h2>
+                    <p class="text-base text-[#1A1A1A]/70 mt-4 font-light">공간의 변화를 직접 확인하세요.</p>
+                </div>
+                <div class="flex gap-4">
+                    <button id="slide-left" class="w-14 h-14 rounded-full border border-[#1B3A4B]/20 flex items-center justify-center hover:bg-[#1B3A4B] hover:text-[#F5F5F0] text-[#1B3A4B] transition-colors"><iconify-icon icon="solar:arrow-left-linear" class="text-xl"></iconify-icon></button>
+                    <button id="slide-right" class="w-14 h-14 rounded-full border border-[#1B3A4B]/20 flex items-center justify-center hover:bg-[#1B3A4B] hover:text-[#F5F5F0] text-[#1B3A4B] transition-colors"><iconify-icon icon="solar:arrow-right-linear" class="text-xl"></iconify-icon></button>
+                </div>
+            </div>
+
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 hide-scrollbar scroll-smooth cursor-grab active:cursor-grabbing" id="portfolio-slider">
+                <!-- Slide 1 -->
+                <div class="snap-center shrink-0 w-[85vw] md:w-[650px] h-[450px] md:h-[550px] relative rounded-[2rem] overflow-hidden group bg-[#1B3A4B]/5">
+                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=800" alt="모던 거실" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/90 via-[#1A1A1A]/20 to-transparent flex flex-col justify-end p-8 md:p-10 pointer-events-none">
+                        <span class="text-sm text-[#00B4D8] uppercase tracking-[0.2em] mb-3 font-normal">01. 주거공간</span>
+                        <h3 class="text-3xl text-[#F5F5F0] font-display font-normal tracking-tighter">모던 미니멀 아파트</h3>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="snap-center shrink-0 w-[85vw] md:w-[650px] h-[450px] md:h-[550px] relative rounded-[2rem] overflow-hidden group bg-[#1B3A4B]/5">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800" alt="오피스 인테리어" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/90 via-[#1A1A1A]/20 to-transparent flex flex-col justify-end p-8 md:p-10 pointer-events-none">
+                        <span class="text-sm text-[#00B4D8] uppercase tracking-[0.2em] mb-3 font-normal">02. 상업공간</span>
+                        <h3 class="text-3xl text-[#F5F5F0] font-display font-normal tracking-tighter">스타트업 오피스</h3>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="snap-center shrink-0 w-[85vw] md:w-[650px] h-[450px] md:h-[550px] relative rounded-[2rem] overflow-hidden group bg-[#1B3A4B]/5">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&q=80&w=800" alt="주방 인테리어" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/90 via-[#1A1A1A]/20 to-transparent flex flex-col justify-end p-8 md:p-10 pointer-events-none">
+                        <span class="text-sm text-[#00B4D8] uppercase tracking-[0.2em] mb-3 font-normal">03. 부분시공</span>
+                        <h3 class="text-3xl text-[#F5F5F0] font-display font-normal tracking-tighter">프리미엄 주방 리모델링</h3>
+                    </div>
+                </div>
+                <!-- Slide 4 -->
+                <div class="snap-center shrink-0 w-[85vw] md:w-[650px] h-[450px] md:h-[550px] relative rounded-[2rem] overflow-hidden group bg-[#1B3A4B]/5">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="카페 인테리어" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/90 via-[#1A1A1A]/20 to-transparent flex flex-col justify-end p-8 md:p-10 pointer-events-none">
+                        <span class="text-sm text-[#00B4D8] uppercase tracking-[0.2em] mb-3 font-normal">04. 상업공간</span>
+                        <h3 class="text-3xl text-[#F5F5F0] font-display font-normal tracking-tighter">감성 카페 인테리어</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Sticky Panels -->
+    <section class="relative bg-[#F5F5F0]" id="process">
+
+        <!-- Phase 1: 상담 -->
+        <div class="protocol-panel h-screen w-full flex items-center justify-center sticky top-0 bg-[#F5F5F0] px-6 z-10">
+            <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1">
+                    <span class="font-display text-sm text-[#00B4D8] uppercase tracking-[0.2em] mb-6 block font-normal">Step 01</span>
+                    <h3 class="text-5xl md:text-6xl leading-[1.1] font-display font-medium tracking-tighter text-[#1B3A4B] mb-8">
+                        무료 상담
+                    </h3>
+                    <p class="text-lg text-[#1A1A1A]/70 leading-relaxed max-w-md font-light">
+                        전화 한 통이면 시작됩니다. 원하시는 공간의 스타일, 예산, 일정을 편하게 말씀해주세요. 전문 디자이너가 맞춤 상담을 진행합니다.
+                    </p>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center">
+                    <div class="w-72 h-72 md:w-[28rem] md:h-[28rem] relative border border-[#1B3A4B]/10 rounded-full flex items-center justify-center bg-white shadow-[0_20px_40px_rgba(0,0,0,0.03)]">
+                        <svg class="w-3/4 h-3/4 text-[#1B3A4B]" viewBox="0 0 100 100" id="motif-svg">
+                            <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" fill="none"/>
+                            <circle cx="50" cy="50" r="25" stroke="#00B4D8" stroke-width="1" stroke-dasharray="10 10" fill="none"/>
+                            <circle cx="50" cy="50" r="10" fill="currentColor" opacity="0.05"/>
+                            <line x1="50" y1="10" x2="50" y2="90" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+                            <line x1="10" y1="50" x2="90" y2="50" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 2: 디자인 제안 -->
+        <div class="protocol-panel h-screen w-full flex items-center justify-center sticky top-0 bg-[#F5F5F0] px-6 z-20 shadow-[0_-20px_40px_rgba(0,0,0,0.02)]">
+            <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1">
+                    <span class="font-display text-sm text-[#00B4D8] uppercase tracking-[0.2em] mb-6 block font-normal">Step 02</span>
+                    <h3 class="text-5xl md:text-6xl leading-[1.1] font-display font-medium tracking-tighter text-[#1B3A4B] mb-8">
+                        실측 & 디자인
+                    </h3>
+                    <p class="text-lg text-[#1A1A1A]/70 leading-relaxed max-w-md font-light">
+                        현장을 직접 방문하여 정밀 실측을 진행합니다. 공간의 구조와 동선을 분석하고, 3D 시뮬레이션으로 완성될 공간을 미리 확인하실 수 있습니다.
+                    </p>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center">
+                    <div class="w-72 h-72 md:w-[28rem] md:h-[28rem] relative border border-[#1B3A4B]/10 rounded-[2rem] bg-white shadow-[0_20px_40px_rgba(0,0,0,0.03)] flex flex-col p-10 justify-between">
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="w-1/3 h-2 bg-[#1B3A4B]/10 rounded-full"></div>
+                            <div class="w-10 h-10 rounded-full border border-[#00B4D8] flex items-center justify-center text-[#00B4D8]">
+                                <iconify-icon icon="solar:ruler-linear" class="text-xl"></iconify-icon>
+                            </div>
+                        </div>
+                        <div class="flex-1 border border-[#1B3A4B]/10 rounded-xl relative overflow-hidden bg-[#F5F5F0]/30">
+                            <div class="absolute inset-0" style="background-image: radial-gradient(#1B3A4B 1px, transparent 1px); background-size: 20px 20px; opacity: 0.1;"></div>
+                            <div id="blueprint-line" class="absolute left-0 top-1/2 w-full h-px bg-[#00B4D8] shadow-[0_0_12px_#00B4D8]"></div>
+                            <div class="absolute left-1/4 top-1/4 bottom-1/4 w-px bg-[#1B3A4B] opacity-30"></div>
+                            <div class="absolute left-3/4 top-1/4 bottom-1/4 w-px bg-[#1B3A4B] opacity-30"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 3: 시공 완료 -->
+        <div class="protocol-panel h-screen w-full flex items-center justify-center sticky top-0 bg-[#F5F5F0] px-6 z-30 shadow-[0_-20px_40px_rgba(0,0,0,0.02)]">
+            <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1">
+                    <span class="font-display text-sm text-[#00B4D8] uppercase tracking-[0.2em] mb-6 block font-normal">Step 03</span>
+                    <h3 class="text-5xl md:text-6xl leading-[1.1] font-display font-medium tracking-tighter text-[#1B3A4B] mb-8">
+                        시공 & 완성
+                    </h3>
+                    <p class="text-lg text-[#1A1A1A]/70 leading-relaxed max-w-md font-light">
+                        숙련된 전문 시공팀이 꼼꼼하게 작업합니다. 매일 시공 현황을 공유드리며, 완공 후 꼼꼼한 최종 점검과 함께 A/S까지 책임집니다.
+                    </p>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center">
+                    <div class="w-72 h-72 md:w-[28rem] md:h-[28rem] relative border border-[#1B3A4B]/10 rounded-[2rem] bg-[#1B3A4B]/5 shadow-[0_20px_40px_rgba(0,0,0,0.03)] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800" alt="완성된 인테리어" class="w-full h-full object-cover transition-transform duration-1000 hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/70 to-transparent flex items-end p-10">
+                            <div class="flex items-center gap-3 bg-white/20 backdrop-blur-md rounded-full px-5 py-2.5 text-[#F5F5F0] text-sm font-normal border border-white/20">
+                                <iconify-icon icon="solar:check-circle-linear" class="text-base"></iconify-icon> 시공 완료 & A/S 보장
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Contact / CTA Section -->
+    <section class="py-32 px-6 md:px-12 bg-[#1B3A4B] rounded-t-[3rem] md:rounded-t-[4rem] relative overflow-hidden" id="contact">
+        <div class="absolute inset-0 opacity-30" style="background: radial-gradient(circle at 70% 30%, #00B4D8 0%, transparent 60%);"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <p class="font-display text-sm text-[#00B4D8] uppercase tracking-[0.2em] mb-6">무료 상담 신청</p>
+            <h2 class="text-4xl md:text-6xl font-display font-medium tracking-tighter text-[#F5F5F0] mb-6">
+                공간의 변화,<br>지금 시작하세요.
+            </h2>
+            <p class="text-lg text-[#F5F5F0]/60 font-light mb-12 max-w-lg mx-auto">
+                간단한 정보만 남겨주시면 24시간 이내에 전문 상담사가 연락드립니다.
+            </p>
+
+            <form class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 text-left" onsubmit="event.preventDefault(); alert('상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다!');">
+                <div>
+                    <input type="text" placeholder="이름" required class="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-[#F5F5F0] placeholder-[#F5F5F0]/40 focus:outline-none focus:border-[#00B4D8] transition-colors text-sm">
+                </div>
+                <div>
+                    <input type="tel" placeholder="연락처" required class="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-[#F5F5F0] placeholder-[#F5F5F0]/40 focus:outline-none focus:border-[#00B4D8] transition-colors text-sm">
+                </div>
+                <div>
+                    <select required class="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-[#F5F5F0]/70 focus:outline-none focus:border-[#00B4D8] transition-colors text-sm appearance-none">
+                        <option value="" disabled selected class="text-[#1A1A1A]">공간 유형</option>
+                        <option value="apartment" class="text-[#1A1A1A]">아파트</option>
+                        <option value="villa" class="text-[#1A1A1A]">빌라/다세대</option>
+                        <option value="house" class="text-[#1A1A1A]">단독주택</option>
+                        <option value="office" class="text-[#1A1A1A]">사무실</option>
+                        <option value="store" class="text-[#1A1A1A]">매장/카페</option>
+                        <option value="partial" class="text-[#1A1A1A]">부분 인테리어</option>
+                    </select>
+                </div>
+                <div>
+                    <select class="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-[#F5F5F0]/70 focus:outline-none focus:border-[#00B4D8] transition-colors text-sm appearance-none">
+                        <option value="" disabled selected class="text-[#1A1A1A]">예산대</option>
+                        <option value="1000" class="text-[#1A1A1A]">1,000만원 이하</option>
+                        <option value="3000" class="text-[#1A1A1A]">1,000~3,000만원</option>
+                        <option value="5000" class="text-[#1A1A1A]">3,000~5,000만원</option>
+                        <option value="5000+" class="text-[#1A1A1A]">5,000만원 이상</option>
+                    </select>
+                </div>
+                <div class="md:col-span-2">
+                    <textarea placeholder="요청사항 (선택)" rows="3" class="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-[#F5F5F0] placeholder-[#F5F5F0]/40 focus:outline-none focus:border-[#00B4D8] transition-colors text-sm resize-none"></textarea>
+                </div>
+                <div class="md:col-span-2 flex justify-center mt-4">
+                    <button type="submit" class="magnetic-btn relative overflow-hidden group rounded-full bg-[#00B4D8] text-white px-10 py-4 text-base font-normal inline-flex items-center justify-center gap-3">
+                        <span class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] z-0"></span>
+                        <span class="relative z-10 group-hover:text-[#1B3A4B] transition-colors duration-500">무료 상담 신청</span>
+                        <iconify-icon icon="solar:arrow-right-linear" class="relative z-10 text-xl group-hover:text-[#1B3A4B] transition-colors duration-500"></iconify-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#1A1A1A] text-[#F5F5F0] pt-24 pb-12 px-6 md:px-12 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16 md:gap-12 mb-24 relative z-10">
+            <div class="col-span-1 md:col-span-2">
+                <div class="font-display font-medium text-3xl mb-6 text-[#00B4D8] flex items-center gap-3">
+                    <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 4L6 18H14V18C14 18 14 28 14 28H26V18H34L20 4Z" fill="#00B4D8"/>
+                        <rect x="18" y="22" width="4" height="6" rx="1" fill="#1A1A1A"/>
+                    </svg>
+                    아이공 인테리어
+                </div>
+                <p class="text-base text-[#F5F5F0]/50 max-w-sm leading-relaxed font-light">
+                    간편한 첫걸음, 공간이 바뀌는 순간.<br>
+                    주거공간부터 상업공간까지, 당신의 일상을 디자인합니다.
+                </p>
+                <a href="tel:01012345678" class="inline-flex items-center gap-3 mt-8 text-[#00B4D8] text-base font-normal hover:text-[#F5F5F0] transition-colors">
+                    <iconify-icon icon="solar:phone-linear" class="text-xl"></iconify-icon> 010-1234-5678
+                </a>
+            </div>
+            <div>
+                <h5 class="font-display text-sm text-[#F5F5F0]/40 uppercase tracking-[0.2em] mb-8 font-normal">바로가기</h5>
+                <ul class="space-y-4 text-base font-light">
+                    <li><a href="#portfolio" class="hover:text-[#00B4D8] transition-colors block">시공 사례</a></li>
+                    <li><a href="#process" class="hover:text-[#00B4D8] transition-colors block">시공 프로세스</a></li>
+                    <li><a href="#philosophy" class="hover:text-[#00B4D8] transition-colors block">디자인 철학</a></li>
+                    <li><a href="#contact" class="hover:text-[#00B4D8] transition-colors block">상담 신청</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-display text-sm text-[#F5F5F0]/40 uppercase tracking-[0.2em] mb-8 font-normal">회사 정보</h5>
+                <ul class="space-y-4 text-base font-light text-[#F5F5F0]/60">
+                    <li class="flex items-start gap-2">
+                        <iconify-icon icon="solar:map-point-linear" class="text-lg mt-0.5 text-[#00B4D8]"></iconify-icon>
+                        <span>서울특별시 강남구 테헤란로 123</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <iconify-icon icon="solar:letter-linear" class="text-lg mt-0.5 text-[#00B4D8]"></iconify-icon>
+                        <span>info@aigong.co.kr</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <iconify-icon icon="solar:clock-circle-linear" class="text-lg mt-0.5 text-[#00B4D8]"></iconify-icon>
+                        <span>평일 09:00 ~ 18:00</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto pt-8 border-t border-[#F5F5F0]/10 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+            <p class="text-sm text-[#F5F5F0]/40 tracking-wider font-light">&copy; 2026 아이공 인테리어. ALL RIGHTS RESERVED.</p>
+            <div class="flex items-center gap-3 bg-[#F5F5F0]/5 rounded-full px-5 py-2 border border-[#F5F5F0]/10">
+                <div class="w-2 h-2 rounded-full bg-[#00B4D8] animate-pulse shadow-[0_0_8px_#00B4D8]"></div>
+                <span class="text-xs font-display text-[#F5F5F0]/60 tracking-[0.2em] uppercase font-normal">상담 가능</span>
+            </div>
+        </div>
+
+        <div class="absolute bottom-[5%] left-0 w-full text-[12vw] font-display font-medium text-[#F5F5F0]/[0.02] leading-none pointer-events-none select-none text-center tracking-tighter">
+            AiGONG INTERIOR
+        </div>
+    </footer>
+
+    <!-- Core Interactions & Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 1. Magnetic Buttons
+            document.querySelectorAll('.magnetic-btn').forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+                    const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+                    gsap.to(btn, { x, y, scale: 1.03, duration: 0.4, ease: "power2.out" });
+                });
+                btn.addEventListener('mouseleave', () => {
+                    gsap.to(btn, { x: 0, y: 0, scale: 1, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+                });
+            });
+
+            // 2. Navbar Morphing
+            ScrollTrigger.create({
+                start: "top -10%",
+                onUpdate: (self) => {
+                    const nav = document.getElementById('navbar');
+                    if (self.direction === 1) {
+                        nav.classList.add('bg-white/20', 'text-[#1B3A4B]', 'border-[#1B3A4B]/5');
+                        nav.classList.remove('bg-black/5', 'text-[#F5F5F0]', 'border-white/10');
+                    } else if (self.progress === 0) {
+                        nav.classList.remove('bg-white/20', 'text-[#1B3A4B]', 'border-[#1B3A4B]/5');
+                        nav.classList.add('bg-black/5', 'text-[#F5F5F0]', 'border-white/10');
+                    }
+                }
+            });
+
+            // 3. Hero Entrance
+            gsap.from(".hero-el", {
+                y: 40, opacity: 0, stagger: 0.15, duration: 1.2, ease: "power3.out", delay: 0.2
+            });
+
+            // 3.5 Hero Slideshow - smooth right slide with loop
+            const heroTrack = document.getElementById('hero-track');
+            const heroDots = document.querySelectorAll('.hero-dot');
+            const totalSlides = 3;
+            let heroIndex = 0;
+            let heroAutoplay;
+
+            function updateDots(idx) {
+                heroDots.forEach((dot, i) => {
+                    dot.classList.toggle('bg-white/80', i === idx % totalSlides);
+                    dot.classList.toggle('bg-white/30', i !== idx % totalSlides);
+                });
+            }
+
+            function heroSlideTo(idx, duration) {
+                const px = -(idx * window.innerWidth);
+                gsap.to(heroTrack, {
+                    x: px,
+                    duration: duration || 1.2,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        if (idx >= totalSlides) {
+                            heroIndex = 0;
+                            gsap.set(heroTrack, { x: 0 });
+                            updateDots(0);
+                        }
+                    }
+                });
+                updateDots(idx);
+            }
+
+            // Recalculate position on resize
+            window.addEventListener('resize', () => {
+                gsap.set(heroTrack, { x: -(heroIndex * window.innerWidth) });
+            });
+
+            function heroNext() {
+                heroIndex++;
+                heroSlideTo(heroIndex, 1.2);
+            }
+
+            function startHeroAutoplay() {
+                heroAutoplay = setInterval(heroNext, 5000);
+            }
+
+            heroDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    clearInterval(heroAutoplay);
+                    heroIndex = parseInt(dot.dataset.index);
+                    heroSlideTo(heroIndex, 0.8);
+                    startHeroAutoplay();
+                });
+            });
+
+            startHeroAutoplay();
+
+            // 4. Card Shuffler
+            const cards = Array.from(document.querySelectorAll('.shuffle-card'));
+            let zIndexes = [3, 2, 1];
+            const scales = [1, 0.95, 0.9];
+            const yOffsets = [0, 15, 30];
+            setInterval(() => {
+                zIndexes.unshift(zIndexes.pop());
+                cards.forEach((card, i) => {
+                    gsap.to(card, {
+                        zIndex: zIndexes[i], scale: scales[zIndexes[i]-1],
+                        y: yOffsets[zIndexes[i]-1], duration: 0.8, ease: "back.out(1.2)"
+                    });
+                });
+            }, 3500);
+
+            // 5. Bubble Level
+            const bubble = document.getElementById('bubble-level');
+            const grade = document.getElementById('grade-readout');
+            gsap.to(bubble, {
+                x: 20, duration: 2.5, repeat: -1, yoyo: true, ease: "sine.inOut",
+                onUpdate: function() {
+                    grade.innerText = (this.progress() * 98).toFixed(1) + "%";
+                }
+            });
+
+            // 6. Scheduler Animation
+            const cursor = document.getElementById('scheduler-cursor');
+            const targetCell = document.getElementById('target-cell');
+            const saveBtn = document.getElementById('save-btn');
+            const schedTl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
+            schedTl.to(cursor, { x: 140, y: 40, duration: 1, ease: "power2.inOut" })
+                   .to(cursor, { scale: 0.8, duration: 0.1, yoyo: true, repeat: 1 })
+                   .to(targetCell, { backgroundColor: "#00B4D8", duration: 0.2 }, "-=0.1")
+                   .to(cursor, { x: 220, y: 150, duration: 0.8, ease: "power2.inOut", delay: 0.4 })
+                   .to(cursor, { scale: 0.8, duration: 0.1, yoyo: true, repeat: 1 })
+                   .to(saveBtn, { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1 }, "-=0.1")
+                   .to(cursor, { opacity: 0, duration: 0.3 })
+                   .to(targetCell, { backgroundColor: "transparent", duration: 0.2, delay: 0.8 })
+                   .set(cursor, { x: 0, y: 0, opacity: 1 });
+
+            // 7. Philosophy Parallax
+            gsap.to(".parallax-bg", {
+                yPercent: 30, ease: "none",
+                scrollTrigger: { trigger: "#philosophy", start: "top bottom", end: "bottom top", scrub: true }
+            });
+            gsap.fromTo("#phil-subtitle",
+                { y: 30, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, scrollTrigger: { trigger: "#philosophy", start: "top 70%" } }
+            );
+            gsap.fromTo("#phil-title",
+                { y: 40, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, delay: 0.2, scrollTrigger: { trigger: "#philosophy", start: "top 70%" } }
+            );
+
+            // 8. Sticky Process Panels
+            const panels = gsap.utils.toArray('.protocol-panel');
+            panels.forEach((panel, i) => {
+                if (i < panels.length - 1) {
+                    gsap.to(panel, {
+                        scale: 0.92, opacity: 0.4, filter: "blur(8px)",
+                        scrollTrigger: { trigger: panels[i + 1], start: "top bottom", end: "top top", scrub: true }
+                    });
+                }
+            });
+            gsap.to("#blueprint-line", { top: "100%", duration: 4, repeat: -1, ease: "linear" });
+            gsap.to("#motif-svg", { rotation: 360, duration: 40, repeat: -1, ease: "none", transformOrigin: "center center" });
+
+            // 9. Portfolio Slider
+            const slider = document.getElementById('portfolio-slider');
+            const slideAmount = window.innerWidth < 768 ? window.innerWidth * 0.85 : 650;
+            document.getElementById('slide-left').addEventListener('click', () => {
+                slider.scrollBy({ left: -slideAmount - 24, behavior: 'smooth' });
+            });
+            document.getElementById('slide-right').addEventListener('click', () => {
+                slider.scrollBy({ left: slideAmount + 24, behavior: 'smooth' });
+            });
+
+            let isDown = false, startX, scrollLeft;
+            slider.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
+            slider.addEventListener('mouseleave', () => { isDown = false; });
+            slider.addEventListener('mouseup', () => { isDown = false; });
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                slider.scrollLeft = scrollLeft - (e.pageX - slider.offsetLeft - startX) * 2;
+            });
+
+            // 10. Feature cards scroll animation
+            gsap.utils.toArray('.feature-card').forEach(card => {
+                gsap.fromTo(card,
+                    { y: 60, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.8, ease: "power2.out",
+                      scrollTrigger: { trigger: card, start: "top 85%" }
+                    }
+                );
+            });
+        });
+    </script>
+
+</body>
+</html>

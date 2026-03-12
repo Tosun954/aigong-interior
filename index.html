@@ -97,29 +97,19 @@ html::-webkit-scrollbar-thumb { background: #1B3A4B; border-radius: 1rem; }
             <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/80 via-[#1A1A1A]/20 to-transparent z-[1]"></div>
         </div>
 
-        <!-- Slide Indicators (centered) -->
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3" id="hero-dots-wrap">
-            <button class="hero-dot w-10 h-1 rounded-full bg-white/80 transition-all duration-500" data-index="0"></button>
-            <button class="hero-dot w-10 h-1 rounded-full bg-white/30 transition-all duration-500" data-index="1"></button>
-            <button class="hero-dot w-10 h-1 rounded-full bg-white/30 transition-all duration-500" data-index="2"></button>
+        <!-- Slide Indicators + Controls (single centered container) -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center" id="hero-dots-wrap">
+            <div class="flex items-center gap-3">
+                <button class="hero-dot w-10 h-1 rounded-full bg-white/80 transition-all duration-500" data-index="0"></button>
+                <button class="hero-dot w-10 h-1 rounded-full bg-white/30 transition-all duration-500" data-index="1"></button>
+                <button class="hero-dot w-10 h-1 rounded-full bg-white/30 transition-all duration-500" data-index="2"></button>
+            </div>
+            <div id="hero-controls" class="flex items-center gap-4 ml-16" style="height: 4px;">
+                <button id="hero-prev" class="text-white/60 hover:text-white transition-colors text-2xl" style="line-height: 0;">&#x2039;</button>
+                <button id="hero-next-btn" class="text-white/60 hover:text-white transition-colors text-2xl" style="line-height: 0;">&#x203A;</button>
+                <button id="hero-pause" class="text-white/60 hover:text-white transition-colors text-base ml-1" style="line-height: 0;">&#x2759;&#x2759;</button>
+            </div>
         </div>
-        <!-- Slide Controls (positioned right of indicators, same vertical line) -->
-        <div id="hero-controls" class="absolute bottom-10 z-20 flex items-center gap-4" style="height: 4px;">
-            <button id="hero-prev" class="text-white/60 hover:text-white transition-colors text-2xl" style="line-height: 0;">&#x2039;</button>
-            <button id="hero-next-btn" class="text-white/60 hover:text-white transition-colors text-2xl" style="line-height: 0;">&#x203A;</button>
-            <button id="hero-pause" class="text-white/60 hover:text-white transition-colors text-base ml-1" style="line-height: 0;">&#x2759;&#x2759;</button>
-        </div>
-        <script>
-        // Position controls right of the centered dots
-        function positionHeroControls() {
-            const dots = document.getElementById('hero-dots-wrap');
-            const controls = document.getElementById('hero-controls');
-            const rect = dots.getBoundingClientRect();
-            controls.style.left = (rect.right + 60) + 'px';
-        }
-        window.addEventListener('load', positionHeroControls);
-        window.addEventListener('resize', positionHeroControls);
-        </script>
         <div class="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-start">
             <div class="overflow-hidden mb-2">
                 <p class="hero-el font-display text-base text-[#00B4D8] uppercase tracking-[0.2em] mb-6 font-normal">AiGONG INTERIOR & DESIGN</p>
@@ -485,9 +475,13 @@ html::-webkit-scrollbar-thumb { background: #1B3A4B; border-radius: 1rem; }
                 }
             });
 
-            // 3. Hero Entrance
-            gsap.from(".hero-el", {
-                y: 40, opacity: 0, stagger: 0.15, duration: 1.2, ease: "power3.out", delay: 0.2
+            // 3. Hero Entrance - 한 줄씩 차례로
+            const heroEls = document.querySelectorAll(".hero-el");
+            heroEls.forEach((el, i) => {
+                gsap.fromTo(el,
+                    { y: 30, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.6, ease: "power2.out", delay: 0.3 + i * 0.25 }
+                );
             });
 
             // 3.5 Hero Slideshow - smooth right slide with loop
@@ -570,45 +564,7 @@ html::-webkit-scrollbar-thumb { background: #1B3A4B; border-radius: 1rem; }
                 }
             });
 
-            // 4. Card Shuffler
-            const cards = Array.from(document.querySelectorAll('.shuffle-card'));
-            let zIndexes = [3, 2, 1];
-            const scales = [1, 0.95, 0.9];
-            const yOffsets = [0, 15, 30];
-            setInterval(() => {
-                zIndexes.unshift(zIndexes.pop());
-                cards.forEach((card, i) => {
-                    gsap.to(card, {
-                        zIndex: zIndexes[i], scale: scales[zIndexes[i]-1],
-                        y: yOffsets[zIndexes[i]-1], duration: 0.8, ease: "back.out(1.2)"
-                    });
-                });
-            }, 3500);
-
-            // 5. Bubble Level
-            const bubble = document.getElementById('bubble-level');
-            const grade = document.getElementById('grade-readout');
-            gsap.to(bubble, {
-                x: 20, duration: 2.5, repeat: -1, yoyo: true, ease: "sine.inOut",
-                onUpdate: function() {
-                    grade.innerText = (this.progress() * 98).toFixed(1) + "%";
-                }
-            });
-
-            // 6. Scheduler Animation
-            const cursor = document.getElementById('scheduler-cursor');
-            const targetCell = document.getElementById('target-cell');
-            const saveBtn = document.getElementById('save-btn');
-            const schedTl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
-            schedTl.to(cursor, { x: 140, y: 40, duration: 1, ease: "power2.inOut" })
-                   .to(cursor, { scale: 0.8, duration: 0.1, yoyo: true, repeat: 1 })
-                   .to(targetCell, { backgroundColor: "#00B4D8", duration: 0.2 }, "-=0.1")
-                   .to(cursor, { x: 220, y: 150, duration: 0.8, ease: "power2.inOut", delay: 0.4 })
-                   .to(cursor, { scale: 0.8, duration: 0.1, yoyo: true, repeat: 1 })
-                   .to(saveBtn, { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1 }, "-=0.1")
-                   .to(cursor, { opacity: 0, duration: 0.3 })
-                   .to(targetCell, { backgroundColor: "transparent", duration: 0.2, delay: 0.8 })
-                   .set(cursor, { x: 0, y: 0, opacity: 1 });
+            // 4-6. (Removed - elements no longer exist)
 
             // 7. Philosophy Parallax
             gsap.to(".parallax-bg", {
@@ -646,15 +602,7 @@ html::-webkit-scrollbar-thumb { background: #1B3A4B; border-radius: 1rem; }
                 slider.scrollLeft = scrollLeft - (e.pageX - slider.offsetLeft - startX) * 2;
             });
 
-            // 10. Feature cards scroll animation
-            gsap.utils.toArray('.feature-card').forEach(card => {
-                gsap.fromTo(card,
-                    { y: 60, opacity: 0 },
-                    { y: 0, opacity: 1, duration: 0.8, ease: "power2.out",
-                      scrollTrigger: { trigger: card, start: "top 85%" }
-                    }
-                );
-            });
+            // 10. (Removed - feature cards no longer exist)
         });
     </script>
 

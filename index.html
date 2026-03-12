@@ -125,13 +125,13 @@ html::-webkit-scrollbar-thumb { background: #1B3A4B; border-radius: 1rem; }
                     공간이 바뀌는 순간.
                 </h2>
             </div>
-            <div class="hero-el flex flex-col sm:flex-row gap-4">
-                <a href="tel:0315052000" class="magnetic-btn relative overflow-hidden group rounded-full bg-[#F5F5F0] text-[#1A1A1A] px-8 py-4 text-base font-normal inline-flex items-center justify-center gap-3">
+            <div class="hero-el flex flex-col sm:flex-row gap-4 items-start">
+                <a href="#contact" class="hero-cta relative overflow-hidden group rounded-full bg-[#F5F5F0] text-[#1A1A1A] px-8 py-4 text-base font-normal inline-flex items-center justify-center gap-3 min-w-[260px]">
                     <span class="absolute inset-0 bg-[#00B4D8] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] z-0"></span>
+                    <iconify-icon icon="solar:document-text-linear" class="relative z-10 text-xl group-hover:text-white transition-colors duration-500"></iconify-icon>
                     <span class="relative z-10 group-hover:text-white transition-colors duration-500">무료 상담 신청하기</span>
-                    <iconify-icon icon="solar:phone-calling-linear" class="relative z-10 text-xl group-hover:text-white transition-colors duration-500"></iconify-icon>
                 </a>
-                <a href="tel:0315052000" class="magnetic-btn relative overflow-hidden group rounded-full border border-[#F5F5F0]/30 text-[#F5F5F0] px-8 py-4 text-base font-normal inline-flex items-center justify-center gap-3">
+                <a href="tel:0315052000" class="hero-cta relative overflow-hidden group rounded-full border border-[#F5F5F0]/30 text-[#F5F5F0] px-8 py-4 text-base font-normal inline-flex items-center justify-center gap-3 min-w-[260px]">
                     <span class="absolute inset-0 bg-[#F5F5F0]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] z-0"></span>
                     <iconify-icon icon="solar:phone-calling-linear" class="relative z-10 text-xl"></iconify-icon>
                     <span class="relative z-10">031-505-2000</span>
@@ -449,7 +449,9 @@ html::-webkit-scrollbar-thumb { background: #1B3A4B; border-radius: 1rem; }
             gsap.registerPlugin(ScrollTrigger);
 
             // 1. Magnetic Buttons
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
             document.querySelectorAll('.magnetic-btn').forEach(btn => {
+                if (isTouchDevice) return;
                 btn.addEventListener('mousemove', (e) => {
                     const rect = btn.getBoundingClientRect();
                     const x = (e.clientX - rect.left - rect.width / 2) * 0.3;

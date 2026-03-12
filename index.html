@@ -97,12 +97,29 @@ html::-webkit-scrollbar-thumb { background: #1B3A4B; border-radius: 1rem; }
             <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/80 via-[#1A1A1A]/20 to-transparent z-[1]"></div>
         </div>
 
-        <!-- Slide Indicators -->
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+        <!-- Slide Indicators (centered) -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3" id="hero-dots-wrap">
             <button class="hero-dot w-10 h-1 rounded-full bg-white/80 transition-all duration-500" data-index="0"></button>
             <button class="hero-dot w-10 h-1 rounded-full bg-white/30 transition-all duration-500" data-index="1"></button>
             <button class="hero-dot w-10 h-1 rounded-full bg-white/30 transition-all duration-500" data-index="2"></button>
         </div>
+        <!-- Slide Controls (positioned right of indicators, same vertical line) -->
+        <div id="hero-controls" class="absolute bottom-10 z-20 flex items-center gap-4" style="height: 4px;">
+            <button id="hero-prev" class="text-white/60 hover:text-white transition-colors text-2xl" style="line-height: 0;">&#x2039;</button>
+            <button id="hero-next-btn" class="text-white/60 hover:text-white transition-colors text-2xl" style="line-height: 0;">&#x203A;</button>
+            <button id="hero-pause" class="text-white/60 hover:text-white transition-colors text-base ml-1" style="line-height: 0;">&#x2759;&#x2759;</button>
+        </div>
+        <script>
+        // Position controls right of the centered dots
+        function positionHeroControls() {
+            const dots = document.getElementById('hero-dots-wrap');
+            const controls = document.getElementById('hero-controls');
+            const rect = dots.getBoundingClientRect();
+            controls.style.left = (rect.right + 60) + 'px';
+        }
+        window.addEventListener('load', positionHeroControls);
+        window.addEventListener('resize', positionHeroControls);
+        </script>
         <div class="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-start">
             <div class="overflow-hidden mb-2">
                 <p class="hero-el font-display text-base text-[#00B4D8] uppercase tracking-[0.2em] mb-6 font-normal">AiGONG INTERIOR & DESIGN</p>
@@ -614,6 +631,30 @@ html::-webkit-scrollbar-thumb { background: #1B3A4B; border-radius: 1rem; }
             });
 
             startHeroAutoplay();
+
+            // Hero slide controls
+            let heroPaused = false;
+            document.getElementById('hero-prev').addEventListener('click', () => {
+                clearInterval(heroAutoplay);
+                heroIndex = (heroIndex - 1 + totalSlides) % totalSlides;
+                heroSlideTo(heroIndex, 0.8);
+                if (!heroPaused) startHeroAutoplay();
+            });
+            document.getElementById('hero-next-btn').addEventListener('click', () => {
+                clearInterval(heroAutoplay);
+                heroNext();
+                if (!heroPaused) startHeroAutoplay();
+            });
+            document.getElementById('hero-pause').addEventListener('click', function() {
+                heroPaused = !heroPaused;
+                if (heroPaused) {
+                    clearInterval(heroAutoplay);
+                    this.innerHTML = '&#x25B6;';
+                } else {
+                    startHeroAutoplay();
+                    this.innerHTML = '&#x2759;&#x2759;';
+                }
+            });
 
             // 4. Card Shuffler
             const cards = Array.from(document.querySelectorAll('.shuffle-card'));
